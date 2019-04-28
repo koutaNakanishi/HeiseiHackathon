@@ -1,71 +1,77 @@
+const score_par_month = 100;//変更してはいけない
+const SCORE_MIN = 0;
+const SCORE_MAX = 30 * 12 * score_par_month;
 
-var videoSetting=new Vue({
-  el:'#videoSetting',
-  data:{
-    speed:1000,//1秒あたり加算するスコア(時間)
-    spendTime:0,//経過時間の合計
-    currentFrame:0,//今のフレーム
-    framePerTime:3000,//1フレームあたりのスコア
-    isRunning:false
-  }
+const videoSetting = new Vue({
+    el: '#videoSetting',
+    data: {
+        time: 0,
+        isRunning: false
+    }
+});
 
-})
+function plusTime(time) {//timeは正の数
+    videoSetting.time = Math.min(videoSetting.time + time, SCORE_MAX);
+}
+
+function minusTime(time) {//timeは正の数
+    videoSetting.time = Math.max(videoSetting.time - time, SCORE_MIN);
+}
 
 //再生ボタン
-var startButton = new Vue({
-  el: '#startButton',
-  data: {
-    buttonImage: "/static/images/startButton.png"
-  },
-  methods: {
-    clickStartButton: function () {
-      videoSetting.isRunning=!videoSetting.isRunning;
-      image_pass = "/static/images/";
-      this.buttonImage = image_pass;
-      this.buttonImage += (videoSetting.isRunning) ? "pauseButton.png" : "startButton.png";
+const startButton = new Vue({
+    el: '#startButton',
+    data: {
+        buttonImage: "/static/images/startButton.png"
+    },
+    methods: {
+        clickStartButton: function () {
+            videoSetting.isRunning = !videoSetting.isRunning;
+            const image_pass = "/static/images/";
+            this.buttonImage = image_pass;
+            this.buttonImage += (videoSetting.isRunning) ? "pauseButton.png" : "startButton.png";
+        }
     }
-  }
-})
+});
 
-//再生を早くするボタン
-var rightButton = new Vue({
-  el: '#rightButton',
-  data: {
-    buttonImage: "/static/images/rightButton.png"
-  },
-  methods: {
-    clickRightButton: function () {
-      videoSetting.speed+=200;
+//1年早めるボタン
+const rightButton = new Vue({
+    el: '#rightButton',
+    data: {
+        buttonImage: "/static/images/rightButton.png"
+    },
+    methods: {
+        clickRightButton: function () {
+            plusTime(12 * score_par_month)
+        }
     }
-  }
-})
+});
 
-//再生を遅くするボタン
-var rightButton = new Vue({
-  el: '#leftButton',
-  data: {
-    buttonImage: "/static/images/lefttButton.png"
-  },
-  methods: {
-    clickLeftButton: function () {
-      videoSetting.speed-=200;
+//1年戻すボタン
+const leftButton = new Vue({
+    el: '#leftButton',
+    data: {
+        buttonImage: "/static/images/lefttButton.png"
+    },
+    methods: {
+        clickLeftButton: function () {
+            minusTime(12 * score_par_month)
+        }
     }
-  }
-})
+});
 
 
+const dd_table = new Vue({
+    el: '#dd-table',
+    data: {
+        schedule: "無し"
+    }
+});
 
-var dd_table = new Vue({
-  el: '#dd-table',
-  data: {
-    schedule: "無し"
-  }
-})
-
-var seken=new Vue({
-  el:'#seken',
-  data:{
-    sekenImage:"/static/images/0.jpg",
-    news:"平成の空気の缶詰発売！"
-  }
-})
+const seken = new Vue({
+    el: '#seken',
+    data: {
+        sekenImage: "/static/images/0.jpg",
+        news: "平成の空気の缶詰発売！"
+    }
+});
