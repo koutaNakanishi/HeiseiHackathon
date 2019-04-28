@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>あきひとくん頑張れ</title>
+  <!-- Vue.jsとBootStrapのよみこみ  -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <!-- 自分で定義した制定期ファル -->
+
+  <link rel="stylesheet" href="/static/common.css">
+
+  <script>
+    var URL = "http://localhost:5000";
+  </script>
+
+
+
+</head>
+
+
+<body>
+
+  <div class="container">
+    <!-- 動画プレイヤーのUIを配置する部分 -->
+
+    <!-- 再生速度とかYYMMとか -->
+    <div class="row">
+      <div id="videoSetting">
+        <li>現在の再生スピード:{{speed}}</li>
+        <li>経過時間:{{spendTime}}</li>
+      </div>
+    </div>
+
+    <!-- ボタン類 -->
+    <div class="row">
+      <div id="leftButton" v-on:click="clickLeftButton">
+        <input type="image" src="/static/images/leftButton.png">
+      </div>
+
+      <div id="startButton">
+        <input type="image" v-on:click="clickStartButton" v-bind:src="buttonImage">
+      </div>
+
+      <div id="rightButton">
+        <input type="image" v-on:click="clickRightButton" src="/static/images/rightButton.png">
+      </div>
+    </div>
+
+
+    <!-- dd-tableを表示する部分 -->
+    <div class="row ">
+      <div class="col-md-3 blue-box" id="dd-table">
+        <p>今月のあきひとの予定:</p>
+        <p>{{schedule}}</p>
+      </div>
+
+      <div class="col-md-1"></div>
+
+      <!-- 世間一般の予定を表示する部分 -->
+      <div class="col-md-3  green-box" id="seken">
+        世間の出来事:
+        <p><img v-bind:src="sekenImage" width="100" height="100"><br></p>
+        <p></p>
+        <p>{{news}}</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/static/vueModels.js"></script>
+  <script type="text/javascript" src="/static/videoSystem.js"></script>
+
+</body>
+
+</html>
