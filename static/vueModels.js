@@ -2,6 +2,13 @@ const score_par_month = 100;//変更してはいけない
 const SCORE_MIN = 0;
 const SCORE_MAX = 30 * 12 * score_par_month;
 
+const dd_table = new Vue({
+    el: '#dd-table',
+    data: {
+        schedule: null,
+    }
+});
+
 const videoSetting = new Vue({
     el: '#videoSetting',
     data: {
@@ -10,10 +17,29 @@ const videoSetting = new Vue({
     }
 });
 
+const show_time = new Vue({
+    el: '#show_time',
+    computed: {
+        yymm: function () {
+            return Math.floor(videoSetting.time / score_par_month)
+        },
+        year: function () {
+            return Math.floor(this.yymm / 12) + 1;
+        },
+        month: function () {
+            return this.yymm % 12 + 1;
+        }
+    },
+    watch: {
+        yymm: function (val) {
+            updateDDTable(val)
+        }
+    }
+});
+
 function plusTime(time) {//timeは正の数
     videoSetting.time = Math.min(videoSetting.time + time, SCORE_MAX);
 }
-
 function minusTime(time) {//timeは正の数
     videoSetting.time = Math.max(videoSetting.time - time, SCORE_MIN);
 }
@@ -33,7 +59,6 @@ const startButton = new Vue({
         }
     }
 });
-
 //1年早めるボタン
 const rightButton = new Vue({
     el: '#rightButton',
@@ -46,7 +71,6 @@ const rightButton = new Vue({
         }
     }
 });
-
 //1年戻すボタン
 const leftButton = new Vue({
     el: '#leftButton',
@@ -57,14 +81,6 @@ const leftButton = new Vue({
         clickLeftButton: function () {
             minusTime(12 * score_par_month)
         }
-    }
-});
-
-
-const dd_table = new Vue({
-    el: '#dd-table',
-    data: {
-        schedule: "無し"
     }
 });
 

@@ -5,16 +5,16 @@
     <meta charset="utf-8">
     <title>あきひとくん頑張れ</title>
     <!-- Vue.jsとBootStrapのよみこみ  -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="http://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    <script src="http://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
 
@@ -42,6 +42,13 @@
         </div>
     </div>
 
+    <div class="row">
+        <div id="show_time">
+            <p>{{ year }}</p>
+            <p>{{ month }}</p>
+        </div>
+    </div>
+
     <!-- ボタン類 -->
     <div class="row">
         <div id="leftButton" v-on:click="clickLeftButton">
@@ -58,11 +65,14 @@
     </div>
 
 
-    <!-- dd-tableを表示する部分 -->
     <div class="row ">
+        <!-- dd-tableを表示する部分 -->
         <div class="col-md-3 blue-box" id="dd-table">
-            <p>今月のあきひとの予定:</p>
-            <p>{{ schedule }}</p>
+            <ul>
+                <li v-for="data in schedule">
+                    日にち：{{ data.day }}　予定：{{ data.schedule }}  場所：{{ data.place }}
+                </li>
+            </ul>
         </div>
 
         <div class="col-md-1"></div>
@@ -77,6 +87,7 @@
     </div>
 </div>
 
+<script type="text/javascript" src="/static/update_data.js"></script>
 <script type="text/javascript" src="/static/vueModels.js"></script>
 <script type="text/javascript" src="/static/videoSystem.js"></script>
 
