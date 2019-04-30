@@ -1,4 +1,6 @@
-from flask import Flask, render_template, request
+import os
+
+from flask import Flask, request, send_from_directory
 
 import ddtable_process
 import event_process
@@ -8,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def root():
-    return render_template('index.html')
+    return app.send_static_file('index.html')
 
 
 @app.route('/dd-table', methods=["GET"])
@@ -21,6 +23,13 @@ def dd_table():
 def event():
     yymm = request.args.get('yymm')
     return event_process.get_event_json(yymm)
+
+
+@app.route('/favicon.ico', methods=["GET"])
+def favicon():
+    favicon_name = "favicon.gif"
+    favicon_pass = os.path.join(app.root_path, 'static', 'images')
+    return send_from_directory(favicon_pass, favicon_name, mimetype='image/gif')
 
 
 if __name__ == "__main__":

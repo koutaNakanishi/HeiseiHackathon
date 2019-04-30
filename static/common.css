@@ -1,0 +1,23 @@
+.blue{
+    background-color: blue;
+}
+
+.red{
+    background-color:red;
+}
+
+.green{
+    background-color:green;
+}
+
+.blue-box {
+
+    background: #f0f7ff;
+    border: dashed 2px #5b8bd0;/*点線*/
+}
+
+
+.green-box {
+    background: #f0f7ff;
+    border: dashed 2px #C1DB81;/*点線*/
+}
