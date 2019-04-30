@@ -30,60 +30,75 @@
 </head>
 
 
-<body>
+<body class="img">
 
-<div class="container">
+<div class="container column">
     <!-- 動画プレイヤーのUIを配置する部分 -->
 
     <!-- 再生速度とかYYMMとか -->
-    <div class="row">
-        <div id="videoSetting">
-            <li>経過時間:{{ time }}</li>
-        </div>
-    </div>
 
-    <div class="row">
-        <div id="show_time">
-            <p>{{ year }}</p>
-            <p>{{ month }}</p>
-        </div>
-    </div>
 
     <!-- ボタン類 -->
-    <div class="row">
-        <div id="leftButton" v-on:click="clickLeftButton">
-            <input type="image" src="/static/images/leftButton.png">
-        </div>
+    <div class="row mt-3 my-8">
+      <!-- 元号表示 -->
+      <div class="mx-5" id="show_time">
+        <div class="mt-4 heisei">
+          <div v-if="year==1">
+          平成元年{{ month }}月
+          </div>
+          <div v-else>
+          平成{{ year }}年{{ month }}月
+          </div>
 
-        <div id="startButton">
-            <input type="image" v-on:click="clickStartButton" v-bind:src="buttonImage">
         </div>
+      </div>
 
-        <div id="rightButton">
-            <input type="image" v-on:click="clickRightButton" src="/static/images/rightButton.png">
-        </div>
+          <div class="mt-5 my-5" id="leftButton" v-on:click="clickLeftButton">
+              <input type="image" src="/static/images/leftButton.png">
+          </div>
+
+          <div class="mt-5" id="startButton">
+              <input type="image" v-on:click="clickStartButton" v-bind:src="buttonImage">
+          </div>
+
+          <div class="mt-5"　id="rightButton">
+              <input type="image" v-on:click="clickRightButton" src="/static/images/rightButton.png">
+          </div>
     </div>
 
+    <!-- あきひとの予定と世間の予定を表示 -->
+    <div class="row">
+      <div class="col-md-5"><h2>あきひとの予定</h2></div>
+      <div class="col-md-1"></div>
+      <div class="col-md-6"><h2>世間の出来事</h2></div>
+    </div>
 
-    <div class="row ">
+    <div class="row">
+
         <!-- dd-tableを表示する部分 -->
-        <div class="col-md-3 blue-box" id="dd-table">
+        <div class="col-md-5 content-box" id="dd-table">
+          <h4>
             <ul>
                 <li v-for="data in schedule">
-                    日にち：{{ data.day }}　予定：{{ data.schedule }}  場所：{{ data.place }}
+                      {{ data.day }}日 <br>
+                      {{ data.schedule }}
                 </li>
             </ul>
+          </h4>
         </div>
 
         <div class="col-md-1"></div>
 
         <!-- 世間一般の予定を表示する部分 -->
-        <div class="col-md-3  green-box" id="seken">
-            世間の出来事:
-            <p><img v-bind:src="sekenImage" width="100" height="100"><br></p>
+        <div class="col-md-6 content-box row-noeq-height" id="seken">
+            <!-- 世間の出来事: -->
+            <p><img v-bind:src="sekenImage" width="500" height="300"><br></p>
             <p></p>
-            <p>{{ news }}</p>
+            <h4>
+              <p>{{ news }}</p>
+            </h4>
         </div>
+
     </div>
 </div>
 
