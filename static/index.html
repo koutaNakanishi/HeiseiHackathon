@@ -40,51 +40,51 @@
 
     <!-- ボタン類 -->
     <div class="row mt-3 my-8">
-      <!-- 元号表示 -->
-      <div class="mx-5" id="show_time">
-        <div class="mt-4 heisei">
-          <div v-if="year==1">
-          平成元年{{ month }}月
-          </div>
-          <div v-else>
-          平成{{ year }}年{{ month }}月
-          </div>
+        <!-- 元号表示 -->
+        <div class="mx-5" id="show_time">
+            <div class="mt-4 heisei">
+                <div v-if="year==1">
+                    平成元年{{ month }}月
+                </div>
+                <div v-else>
+                    平成{{ year }}年{{ month }}月
+                </div>
 
+            </div>
         </div>
-      </div>
 
-          <div class="mt-5 my-5" id="leftButton" v-on:click="clickLeftButton">
-              <input type="image" src="/static/images/leftButton.png">
-          </div>
+        <div class="mt-5 my-5" id="leftButton" v-on:click="clickLeftButton">
+            <input type="image" src="/static/images/leftButton.png">
+        </div>
 
-          <div class="mt-5" id="startButton">
-              <input type="image" v-on:click="clickStartButton" v-bind:src="buttonImage">
-          </div>
+        <div class="mt-5" id="startButton">
+            <input type="image" v-on:click="clickStartButton" v-bind:src="buttonImage">
+        </div>
 
-          <div class="mt-5"　id="rightButton">
-              <input type="image" v-on:click="clickRightButton" src="/static/images/rightButton.png">
-          </div>
+        <div class="mt-5" id="rightButton" v-on:click="clickRightButton">
+            <input type="image" src="/static/images/rightButton.png">
+        </div>
     </div>
 
     <!-- あきひとの予定と世間の予定を表示 -->
     <div class="row">
-      <div class="col-md-5"><h2>あきひとの予定</h2></div>
-      <div class="col-md-1"></div>
-      <div class="col-md-6"><h2>世間の出来事</h2></div>
+        <div class="col-md-5"><h2>あきひとの予定</h2></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6"><h2>世間の出来事</h2></div>
     </div>
 
     <div class="row">
 
         <!-- dd-tableを表示する部分 -->
         <div class="col-md-5 content-box" id="dd-table">
-          <h4>
-            <ul>
-                <li v-for="data in schedule">
-                      {{ data.day }}日 <br>
-                      {{ data.schedule }}
-                </li>
-            </ul>
-          </h4>
+            <h4>
+                <ul>
+                    <li v-for="data in schedule">
+                        {{ data.day }}日 <br>
+                        {{ data.schedule }}
+                    </li>
+                </ul>
+            </h4>
         </div>
 
         <div class="col-md-1"></div>
@@ -95,7 +95,7 @@
             <p><img v-bind:src="sekenImage" width="500" height="300"><br></p>
             <p></p>
             <h4>
-              <p>{{ news }}</p>
+                <p>{{ news }}</p>
             </h4>
         </div>
 

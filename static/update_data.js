@@ -34,7 +34,6 @@ function updateSeken(yymm) {
             console.log("リクエスト失敗");
         } else {
             const someObj = JSON.parse(request.responseText);
-            console.log(someObj);
             if (someObj.isUpdate === "true") {
                 const prefix = "data:image/jpg;base64,";
                 seken.sekenImage = prefix + someObj.image;
