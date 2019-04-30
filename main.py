@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, send_from_directory
 import os
+
+from flask import Flask, request, send_from_directory
+
 import ddtable_process
 import event_process
 
@@ -25,9 +27,9 @@ def event():
 
 @app.route('/favicon.ico', methods=["GET"])
 def favicon():
-    favicon_name = "reiwa.jpg"
+    favicon_name = "favicon.gif"
     favicon_pass = os.path.join(app.root_path, 'static', 'images')
-    return "hoge"
+    return send_from_directory(favicon_pass, favicon_name, mimetype='image/gif')
 
 
 if __name__ == "__main__":

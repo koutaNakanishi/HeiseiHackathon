@@ -9,6 +9,14 @@ const dd_table = new Vue({
     }
 });
 
+const seken = new Vue({
+    el: '#seken',
+    data: {
+        sekenImage: null,
+        news: null
+    }
+});
+
 const videoSetting = new Vue({
     el: '#videoSetting',
     data: {
@@ -32,7 +40,8 @@ const show_time = new Vue({
     },
     watch: {
         yymm: function (val) {
-            updateDDTable(val)
+            updateDDTable(val);
+            updateSeken(val);
         }
     }
 });
@@ -40,6 +49,7 @@ const show_time = new Vue({
 function plusTime(time) {//timeは正の数
     videoSetting.time = Math.min(videoSetting.time + time, SCORE_MAX);
 }
+
 function minusTime(time) {//timeは正の数
     videoSetting.time = Math.max(videoSetting.time - time, SCORE_MIN);
 }
@@ -81,13 +91,5 @@ const leftButton = new Vue({
         clickLeftButton: function () {
             minusTime(12 * score_par_month)
         }
-    }
-});
-
-const seken = new Vue({
-    el: '#seken',
-    data: {
-        sekenImage: "/static/images/0.jpg",
-        news: "平成の空気の缶詰発売！"
     }
 });

@@ -1,4 +1,4 @@
-const videospeed = 10;//1秒でどれだけ増えるか(開発中に変更すべき)
+const videospeed = 50;//1秒でどれだけ増えるか(開発中に変更すべき)
 
 function addTime() {
     if (videoSetting.isRunning === false)
