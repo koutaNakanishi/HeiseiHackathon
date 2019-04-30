@@ -2,6 +2,14 @@ const score_par_month = 100;//変更してはいけない
 const SCORE_MIN = 0;
 const SCORE_MAX = 30 * 12 * score_par_month;
 
+const videoSetting = new Vue({
+    el: '#videoSetting',
+    data: {
+        time: 0,
+        isRunning: false
+    }
+});
+
 const dd_table = new Vue({
     el: '#dd-table',
     data: {
@@ -14,14 +22,6 @@ const seken = new Vue({
     data: {
         sekenImage: null,
         news: null
-    }
-});
-
-const videoSetting = new Vue({
-    el: '#videoSetting',
-    data: {
-        time: 0,
-        isRunning: false
     }
 });
 
@@ -43,6 +43,10 @@ const show_time = new Vue({
             updateDDTable(val);
             updateSeken(val);
         }
+    },
+    created: function () {
+        updateDDTable(this.yymm)
+        updateSeken(this.yymm)
     }
 });
 
