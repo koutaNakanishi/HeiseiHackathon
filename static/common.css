@@ -10,14 +10,62 @@
     background-color:green;
 }
 
-.blue-box {
+.dd-box {
 
     background: #f0f7ff;
     border: dashed 2px #5b8bd0;/*点線*/
 }
 
 
-.green-box {
+.event-box {
     background: #f0f7ff;
     border: dashed 2px #C1DB81;/*点線*/
+}
+
+
+ul, ol {
+  padding: 0;
+  margin-right: auto;
+}
+
+ul li, ol li {
+  color: #2d8fdd;
+  border-left: solid 6px #2d8fdd;/*左側の線*/
+  background: #f1f8ff;/*背景色*/
+  margin-bottom: 10px;/*下のバーとの余白*/
+   line-height: 1.5;
+  padding: 0.5em;
+  list-style-type: none!important;/*ポチ消す*/
+}
+
+
+.content-box {
+    /* border: 4px solid #82636b;
+    border-radius: 240px 15px 185px 15px / 15px 200px 15px 185px;
+    margin: 2em 0;
+    padding: 2em; */
+}
+
+.media-box{
+  background-color:#eee;
+  border-radius:50px;
+}
+
+.heisei{
+  font-size:600%;
+}
+
+.column{
+  min-height:1000px
+}
+
+.row-noeq-height {
+    /* display: flex; */
+    flex-wrap: nowrap;
+}
+
+.img{
+  border: 4px double #ddd;
+  margin: 2em 2em 2em 2em;
+
 }

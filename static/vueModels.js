@@ -1,6 +1,6 @@
 const score_par_month = 100;//変更してはいけない
 const SCORE_MIN = 0;
-const SCORE_MAX = 30 * 12 * score_par_month;
+const SCORE_MAX = (30 * 12 + 3) * score_par_month;
 
 const videoSetting = new Vue({
     el: '#videoSetting',

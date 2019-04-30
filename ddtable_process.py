@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 
 
 def get_ddtable_json(yymm):
@@ -32,8 +33,10 @@ def get_ddtable_json(yymm):
     year = yymm // 12 + 1
     month = yymm % 12 + 1
     path = "ddtable/{}/{}/yotei.json".format(year, month)
-    # with open(path, "r", encoding="utf-8") as f:
-    #    return flask.json.load(f, encoding="utf-8")
+    if not os.path.exists(path):
+        year = (year - 1) % 7 + 1
+        path = "ddtable/{}/{}/yotei.json".format(year, month)
+
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
 
@@ -69,10 +72,14 @@ def txt_to_json():
     ```
     :return: None
     """
-    for y in range(1, 31):
+    for y in range(1, 32):
         for m in range(1, 13):
             jsondata = []
-            with open("ddtable/{}/{}/yotei.txt".format(y, m), "r", encoding="shift-jis") as csvfile:
+            csv_path = "ddtable/{}/{}/yotei.txt".format(y, m)
+
+            if not os.path.exists(csv_path):
+                continue
+            with open(csv_path, "r", encoding="shift-jis") as csvfile:
                 reader = csv.DictReader(csvfile, fieldnames=["day", "schedule", "place"])
                 for row in reader:
                     jsondata.append(row)

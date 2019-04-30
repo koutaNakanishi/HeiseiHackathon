@@ -1,6 +1,7 @@
 import base64
 import collections as cl
 import json
+import os
 from os import path
 
 
@@ -18,36 +19,47 @@ def get_event_json(yymm):
     :param yymm: 平成y年m月とすると、(y-1)*12+(m-1)
     :return: 上で示された形式のjson
     """
+    max_yymm_zfill = get_floor_yymm_zfill(yymm)
+    data_path = "./seken" + "/" + max_yymm_zfill
+
+    picture_path = data_path + r"/picture.jpg"
+    with open(picture_path, 'rb') as f:
+        data = f.read()
+    image_text = base64.b64encode(data).decode("utf-8")
+
+    caption_path = data_path + r"/caption.txt"
+    with open(caption_path, encoding="utf-8") as f:
+        caption_text = f.read()
+
+    send_data = cl.OrderedDict()
+    send_data["isUpdate"] = "true"
+    send_data["image"] = image_text
+    send_data["caption"] = caption_text
+    send_json = json.dumps(send_data, ensure_ascii=False)
+    return send_json
+
+
+def yymm_to_zfill(yymm):
+    year = yymm // 12 + 1
+    month = yymm % 12 + 1
+    return str(year).zfill(2) + str(month).zfill(2)
+
+
+def get_floor_yymm_zfill(yymm):
     yymm = int(yymm)
-    yy = yymm // 12 + 1
-    mm = yymm % 12 + 1
-    yy = str(yy)
-    yy = yy.zfill(2)
-    mm = str(mm)
-    mm = mm.zfill(2)
-    yymm_string = yy + mm
-    data_path = r"./seken/" + yymm_string
+    zfill_yymm = int(yymm_to_zfill(yymm))
+    path_list = []
+    for directory in os.listdir("./seken"):
+        if path.isfile(directory):
+            continue
+        path_list.append(int(directory))
+    floor_pathlist = [x for x in path_list if x <= zfill_yymm]
+    max_yymm = max(floor_pathlist)
+    return str(max_yymm).zfill(4)
 
-    if not path.exists(data_path):
-        send_data = cl.OrderedDict()
-        send_data["isUpdate"] = "false"
-        send_data["image"] = None
-        send_data["caption"] = None
-        send_json = json.dumps(send_data, ensure_ascii=False)
-        return send_json  # jsonにアップデートなしで出力
-    else:
-        target_file = data_path + r"/picture.jpg"
-        with open(target_file, 'rb') as f:
-            data = f.read()
-        image_text = base64.b64encode(data).decode("utf-8")
 
-        target_file = data_path + r"/caption.txt"
-        with open(target_file, encoding="utf-8") as f:
-            caption_text = f.read()
-
-        send_data = cl.OrderedDict()
-        send_data["isUpdate"] = "true"
-        send_data["image"] = image_text
-        send_data["caption"] = caption_text
-        send_json = json.dumps(send_data, ensure_ascii=False)
-        return send_json
+def test_get_floor_yymm_zfill():
+    assert get_floor_yymm_zfill(0) == "0101"
+    assert get_floor_yymm_zfill(2) == "0101"
+    assert get_floor_yymm_zfill(3) == "0104"
+    assert get_floor_yymm_zfill(12 * (5 - 1) + 10 - 1) == "0510"
